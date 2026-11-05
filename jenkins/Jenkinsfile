@@ -1,0 +1,19 @@
+pipeline {
+  agent any
+  tools { jdk 'jdk17'; maven 'maven3' }
+  stages {
+    stage('Checkout') { steps { checkout scm } }
+    stage('Selenium UI') {
+      steps { dir('selenium-java-testng') { sh 'mvn -B clean test -Dheadless=true' } }
+      post { always { junit allowEmptyResults: true, testResults: 'selenium-java-testng/target/surefire-reports/*.xml' } }
+    }
+    stage('Playwright API') {
+      steps {
+        dir('playwright-javascript-api') {
+          sh 'npm ci'
+          sh 'npx playwright test'
+        }
+      }
+    }
+  }
+}
