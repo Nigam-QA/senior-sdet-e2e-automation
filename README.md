@@ -52,21 +52,3 @@ To view the HTML report:
 ```bash
 npx playwright show-report
 ```
-
-## CI
-
-GitHub Actions workflows run the UI and API suites independently on pushes and pull requests. A Jenkins pipeline is included under `jenkins/Jenkinsfile`.
-
-## Security
-
-- Never commit real credentials, tokens, cookies, or production data.
-- Keep secrets in GitHub Actions Secrets or Jenkins Credentials.
-- `.env` and local override files are ignored by Git.
-
-## Suggested next enhancements
-
-- Add a database test-data adapter and isolated test data.
-- Add contract testing (e.g. Pact) where service contracts are available.
-- Add accessibility checks and visual regression tests.
-- Add Dockerized browser execution and a test-grid strategy.
-- Publish reports as CI artifacts.
